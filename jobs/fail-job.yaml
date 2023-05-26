@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: null
+  labels:
+    run: fail-math-job
+  name: fail-math-job
+spec:
+  completions: 3
+  parallelism: 3
+  template:
+    spec:
+      containers:
+      - image: ubuntu
+        name: xmath-add-job
+        command: ['expr', '3', '+', '2']
+      restartPolicy: Never

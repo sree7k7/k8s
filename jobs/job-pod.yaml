@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: null
+  labels:
+    run: math-add-job
+  name: math-add-job
+spec:
+  completions: 3
+  parallelism: 3
+  template:
+    spec:
+      containers:
+      - image: ubuntu
+        name: math-add-job
+        command: ['expr', '3', '+', '2']
+      restartPolicy: Never

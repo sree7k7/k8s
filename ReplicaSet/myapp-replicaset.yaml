@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  namespace: dev
+  name: myapp-rs
+  labels:
+    app: myapps
+spec:
+  template:
+    metadata:     # pod metadata
+      name: myapp-pod
+      labels:
+        app: myapp # this (label) name has to be same as matchlabels
+    spec:
+      containers: 
+        - name: nginx-image-container
+          image: nginx
+  replicas: 6
+  selector:
+    matchLabels:
+      app: myapp # this label name must matach pod label from above template definition
+  
+# kubectl create -f myapp-replicaset.yaml
+# kubectl get replicaset 
+# kubectl get rs
+#  To update the replicas
+# kubectl replace -f myapp-replicaset.yaml
+# kubectl scale --replicas=6 -f myapp-replicaset.yaml
+# kubectl scale --replicas=9 replicaset myapp-replicaset
+# kb delete replicaset replicaset-1 replicaset-2
+# kb create replica-set my-next-replice --image nginx --dry-run -o yaml

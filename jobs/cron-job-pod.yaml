@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  name: nextgeneration
+spec:
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: nextgeneration
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - image: nginx
+            name: nextgeneration
+            command: ['expr', '3', '+', '2']
+          restartPolicy: OnFailure
+  schedule: 0/5 * * * ?

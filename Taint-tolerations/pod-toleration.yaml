@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod-toleration
+  # namespace: new-name-space
+  labels:
+    app: myapp-pod-toleration
+spec:
+  containers: 
+     - name: nginx-container
+       image: nginx
+  tolerations:
+  - key: "app"
+    operator: "Equal"
+    value: "blue"
+    effect: "NoSchedule"

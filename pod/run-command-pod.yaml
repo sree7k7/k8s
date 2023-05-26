@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod 
+metadata:
+  name: ubuntu-sleeper-2
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu
+    # command: ["sleep 5000"] or
+    # command: ["sleep", "5000"] or
+    # command:
+    # - "sleep"
+    # - "5000"
+    command: [ "sleep" ]
+    args: [ "5000" ]

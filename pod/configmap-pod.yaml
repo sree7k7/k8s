@@ -1,0 +1,45 @@
+# apiVersion: v1
+# kind: Pod 
+# metadata:
+#   name: env-variable-pod
+# spec:
+#   containers:
+#   - name: env-variable-pod
+#     image: ubuntu
+#     ports:
+#       - containerPort: 8080
+#     envFrom:
+#       - configMapRef:
+#             name: app-config
+
+
+## referencing the configMap on pod
+
+# configMap
+
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: webapp-config-map
+# data:
+#   APP_COLOR: darkblue
+#   APP_OTHER: disregard
+
+# # Ref the above configMap to below Pod
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: webapp-color
+  name: webapp-color
+  namespace: default
+spec:
+  containers:
+  - env:
+    - name: APP_COLOR-name
+      valueFrom:
+        configMapKeyRef:
+          name: app-config
+          key: app_color
+

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    app: myapps
+spec:
+  template:
+    metadata: # pod metadata
+      name: myapp-pod
+      labels:
+        app: myapp # this (label) name has to be same as matchlabels
+    spec:
+      containers:
+        - name: nginx-image-container
+          image: nginx
+          command:
+            - sh
+            - "-c"
+            - echo Hello Kubernetes! && sleep 3600
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp # this label name must matach pod label from above template definition
+
+# kb create deploy my-deploy --image nginx --dry-run -o yaml
