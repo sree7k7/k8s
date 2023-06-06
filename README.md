@@ -381,10 +381,26 @@ kubectl get svc -n ingress-nginx
 kubectl get svc -A
 ```
 To add the new path to your ingress:
-- `kubectl edit ingress ingressName -n namespace`
+- `kubectl edit ingress ingressName -n namespace` or `kubectl edit ingress -n namespace`.
+
 Once you save, it will automatically updated with new path.
 
 To get the `ingress-controller` namespace, type: `kubectl get svc -A`
+
+### To get the host name of ingress resource
+
+`kubectl describe ingress -A` or give namespace.
+
+```
+kubectl create ns ingress-nginx
+kubectl create configmap ingress-nginx-controller -n ingress-nginx
+kubectl create serviceaccount ingress-nginx -n ingress-nginx
+kubectl create serviceaccount ingress-nginx-admission -n ingress-nginx
+kubectl get roles -A
+kubectl get rolebindings -A
+```
+
+[ingress-controller.yaml](ingress-controller/ingress-controller.yaml)
 
 ## Install k8s the kubeadm way
 
