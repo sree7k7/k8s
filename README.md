@@ -378,7 +378,14 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 kubectl get ingress -A
 kubectl describe ingress -A
 kubectl get svc -n ingress-nginx
+kubectl get svc -A
 ```
+To add the new path to your ingress:
+- `kubectl edit ingress ingressName -n namespace`
+Once you save, it will automatically updated with new path.
+
+To get the `ingress-controller` namespace, type: `kubectl get svc -A`
+
 ## Install k8s the kubeadm way
 
 
