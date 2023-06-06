@@ -171,7 +171,7 @@ Declarative: [configMap.yaml](ConfigMap/configMap.yaml)
 ```
 kubectl create secret generic app-secret --from-literal=DB_HOST=mysql
 
------------
+------
 
 k get secrets app-secret -o yaml
 ```
@@ -359,31 +359,8 @@ kubectl create service nodeport pod-label --tcp=3008:80 --dry-run=client -o yaml
 
 ## Ingress Networking
 
-### Ingress resource cmd
-```docker
-kubectl create ingress <ingress-name> --rule="host/path=service:port"
 
-# e.g:
-kubectl create ingress ingress-test --rule="wear.my-online-store.com/wear*=wear-service:80"
-```
+------
+------
 
-
-`https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.34.1/deploy/static/provider/baremetal/deploy.yaml`
-```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.34.1/deploy/static/provider/baremetal/deploy.yaml
-```
-
-## ingress related commands
-```
-kubectl get ingress -A
-kubectl describe ingress -A
-kubectl get svc -n ingress-nginx
-```
 ## Install k8s the kubeadm way
-
-
-
-
-
-
-
