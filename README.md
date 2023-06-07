@@ -359,6 +359,8 @@ kubectl create service nodeport pod-label --tcp=3008:80 --dry-run=client -o yaml
 
 ## Ingress Networking
 
+Nginx controller look for paths in nginx resource file. After, finding the path it will look for related service (which connects to pod, deployment).
+
 ### Ingress resource cmd
 ```docker
 kubectl create ingress <ingress-name> --rule="host/path=service:port"
@@ -405,8 +407,11 @@ kubectl get rolebindings -A
 ## Install k8s the kubeadm way
 
 
+## Network Policy
 
+A network policy can be applied on a Pod. The pod policy will define how the traffic is received or blocked from different pods in cluster.
 
+[network-policy-definition.yaml](NetworkPolicy/network-policy-definition.yaml)
 
 
 
