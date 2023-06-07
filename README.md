@@ -415,4 +415,8 @@ ingress network policy: [network-policy-definition.yaml](NetworkPolicy/network-p
 
 ## Persistent volume
 
+A pod requires the volume to store the data.
+
+To bind a pod and persistent volume. Create a persistent volume claim and bind with pod. Note: pod need the claim name to bind.
+
 [pod-and-claim](PersistentVolumes/pod-and-claim.yaml)
