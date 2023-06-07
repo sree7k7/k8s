@@ -411,6 +411,8 @@ kubectl get rolebindings -A
 
 A network policy can be applied on a Pod. The pod policy will define how the traffic is received or blocked from different pods in cluster.
 
+`kubectl get netpol`
+
 ingress network policy: [network-policy-definition.yaml](NetworkPolicy/network-policy-definition.yaml)
 
 ...
