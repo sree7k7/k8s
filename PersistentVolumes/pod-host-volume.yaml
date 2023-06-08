@@ -3,14 +3,35 @@ kind: Pod
 metadata:
   name: webapp
 spec:
-  containers:
-  - image: kodekloud/event-simulator
-    name: event-simulator
-    volumeMounts:
-    - mountPath: /log
-      name: log-volume #This is volume name
-  volumes:
-  - name: log-volume
-    hostPath:
-      path: /var/log/webapp
-      type: Directory
+    containers:
+    - image: kodekloud/event-simulator
+      name: event-simulator
+      volumeMounts:
+      - mountPath: /log
+        name: log-volume #This is volume name
+    volumes:
+    - name: log-volume
+      hostPath:
+        path: /var/log/webapp
+        type: Directory
+
+
+
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: pv-recycler
+#   namespace: default
+# spec:
+#   restartPolicy: Never
+#   volumes:
+#   - name: vol
+#     hostPath:
+#       path: /any/path/it/will/be/replaced
+#   containers:
+#   - name: pv-recycler
+#     image: "registry.k8s.io/busybox"
+#     command: ["/bin/sh", "-c", "test -e /scrub && rm -rf /scrub/..?* /scrub/.[!.]* /scrub/*  && test -z \"$(ls -A /scrub)\" || exit 1"]
+#     volumeMounts:
+#     - name: vol
+#       mountPath: /scrub

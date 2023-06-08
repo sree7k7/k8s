@@ -6,8 +6,10 @@ spec:
   containers:
   - image: alpine
     name: alpine
+    command: ["/bin/sh","-c"]
+    args: ["shuf -i 0-100 -n 1 >> /opt/number.txt;"]
     volumeMounts:
-    - mountPath: "/var/www/html"
+    - mountPath: "/opt"
       name: mypd
   volumes:
     - name: mypd
@@ -16,6 +18,20 @@ spec:
     # command: ["shuf -i 0-100 -n 1 >> /tmp/data/number.out;"]
 
 ---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-log
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/test"
+---
 
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -23,7 +39,7 @@ metadata:
   name: myclaim
 spec:
   accessModes:
-      - ReadWriteOnce
+      - ReadWriteMany
   resources:
       requests:
         storage: 500Mi
