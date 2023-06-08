@@ -413,6 +413,11 @@ A network policy can be applied on a Pod. The pod policy will define how the tra
 
 ingress network policy: [network-policy-definition.yaml](NetworkPolicy/network-policy-definition.yaml)
 
+<<<<<<< HEAD
+## State Persistence
+
+### Volumes
+=======
 ## Persistent volume
 
 A pod requires the volume to store the data.
@@ -420,3 +425,4 @@ A pod requires the volume to store the data.
 To bind a pod and persistent volume. Create a persistent volume claim and bind with pod. Note: pod required the claim name to bind.
 
 [pod-and-claim](PersistentVolumes/pod-and-claim.yaml)
+>>>>>>> refs/remotes/origin/main
