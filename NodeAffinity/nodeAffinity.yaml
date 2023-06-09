@@ -4,6 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     run: pod
+    size: Large
   name: pod-nodeaffinity
 spec:
   containers:

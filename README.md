@@ -4,6 +4,8 @@
 
 - Make a file: [kind-example-config.yaml](kind-example-config.yaml)
 - execute: `kind create cluster --config kind-example-config.yaml`
+- To delete: `kind delete clusters kind`
+- get into kind control plane: `docker exec -it kind-control-plane bash`
 - If you face any error:
 ```bash
 ERROR: failed to create cluster: failed to get kubeconfig to merge: yaml: unmarshal errors:
@@ -44,11 +46,14 @@ kubectl get pod nginx -o yaml
 kubectl run nginx --image=nginx
 k run pod-name --image image --dry-run=client -o yaml
 
-k exec -i podName -n namespace -- pwd
-k exec -it podName -n namespace -- pwd
+kubectl exec -i podName -n namespace -- pwd
+kubectl exec -it podName -n namespace -- pwd
+kubectl exec -it pod -- bash
 
 # To replace the pod-definition file.
 k replace --force -f pod.yaml
+or try
+k apply -f pod-with-secrets.yaml
 
 e.g:
 kubectl run nginx --image=nginx --dry-run=client -o yaml
@@ -79,13 +84,13 @@ kubectl get rs
 ```
 
 - kubectl replace -f [myapp-replicaset.yaml](/ReplicaSet/myapp-replicaset.yaml)
-
-- kubectl scale --replicas=6 -f myapp-replicaset.yaml
-- kubectl scale --replicas=9 replicaset myapp-replicaset
-- kb delete replicaset replicaset-1 replicaset-2
-
+```
+kubectl scale --replicas=6 -f myapp-replicaset.yaml
+kubectl scale --replicas=9 replicaset myapp-replicaset
+kb delete replicaset replicaset-1 replicaset-2
+```
 ## Deployments
-
+[deployments.yaml](deployments/deployments.yaml)
 ```kubectl
 kb create deploy my-deploy --image nginx --dry-run -o yaml
 kb create deploy my-deploy --image nginx --dry-run -o yaml > deployment.yaml
@@ -144,7 +149,7 @@ e.g: `kb get all -n dev`
 
 ## Imperative commands 
 
-[*Imperative commands*](imperative-commands.txt)
+[*Imperative commands*](imperative-commands.md)
 
 ## Commands in Docker
 - To sleep a container for 5 seconds
@@ -216,7 +221,7 @@ The `taint-effect` has three options `NoSchedule`, `PreferNoSchedule`, `NoExecut
 To remove taint fromt the node:
 
 ```
-kubectl taint node controlplane node-role.kubernetes.io/master:NoSchedule-
+kubectl taint nodes kind-control-plane app=blue:NoSchedule-
 ```
 - Edit the control plane and comment the taint.
 ```
