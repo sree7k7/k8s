@@ -1,9 +1,9 @@
 FROM ubuntu
 
 RUN apt-get update
-RUN apt-get install python
+RUN apt-get install python3 -y
 
-RUN pip install flask
+RUN apt install python3-pip -y
 RUN pip install flask-mysql
 
 COPY . /opt/source-code
