@@ -1,11 +1,11 @@
-FROM ubuntu
+FROM python:3.6-alpine
 
-RUN apt-get update
-RUN apt-get install python3 -y
+RUN pip install flask
 
-RUN apt install python3-pip -y
-RUN pip install flask-mysql
+COPY . /opt/
 
-COPY . /opt/source-code
+EXPOSE 8080
 
-ENTRYPOINT FLASK_APP=/opt/source-code/app.py flask run
+WORKDIR /opt
+
+ENTRYPOINT ["python", "app.py"]

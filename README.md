@@ -155,6 +155,15 @@ e.g: `kb get all -n dev`
 - To sleep a container for 5 seconds
 ```
 docker run --name ubuntu-sleeper ubuntu-sleeper 10
+
+# publish port 8080 on the container to 8282 on the host.
+docker run -p 8282:8080 webapp-color
+
+# container image
+docker run python:3.6 cat /etc/*release*
+# for lite images use alpine and add "tag" to image.
+
+docker build -t webapp-color:lite .
 ```
 
 ## Config maps
@@ -428,4 +437,8 @@ To bind a pod and persistent volume. Create a persistent volume claim and bind w
 [pod-and-claim](PersistentVolumes/pod-and-claim.yaml)
 
 ### Storage classes
+
+updating...
+
+## Autentication
 
