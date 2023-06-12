@@ -3,7 +3,9 @@ kind: Role
 metadata: 
   name: developer
 rules:
-- apiGroups:
-    - 
+- apiGroups: [""]
   resources: ["pods"]
   verbs: ["list", "get", "create", "update", "delete"]
+- apiGroups: [""]
+  resources: ["ConfigMap"]
+  verbs: ["create"]
