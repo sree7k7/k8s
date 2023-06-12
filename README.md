@@ -473,3 +473,14 @@ kubectl describe role developer
 kubectl get rolebindings.rbac.authorization.k8s.io
 
 ```
+
+### check the user can access a resource or not, e.g: deployment
+`kubectl auth can-i create deployments`,
+
+`kubectl auth can-i delete deployments`
+
+To check for other user access:
+
+`kubectl auth can-i create pod --as dev-user`,
+
+`kubectl auth can-i delete pod --as dev-user`

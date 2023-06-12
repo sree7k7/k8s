@@ -6,6 +6,7 @@ rules:
 - apiGroups: [""]
   resources: ["pods"]
   verbs: ["list", "get", "create", "update", "delete"]
+  resourceNames: ["blue", "orange"] ## restrict access to blue, orange pods.
 - apiGroups: [""]
   resources: ["ConfigMap"]
   verbs: ["create"]
