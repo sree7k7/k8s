@@ -451,3 +451,7 @@ path: /root/.kube/config
 `kubectl config view`
 
 [kubeconfig.yaml](kubeconfig/kubeconfig.yaml)
+
+To use that context, run the command: kubectl config --kubeconfig=/root/my-kube-config use-context research
+
+To know the current context, run the command: kubectl config --kubeconfig=/root/my-kube-config current-context
