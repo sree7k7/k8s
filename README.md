@@ -1,4 +1,4 @@
-# Kubernetes..
+# Kubernetes
 
 ## Install multi node kind cluster
 
