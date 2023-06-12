@@ -458,3 +458,18 @@ To know the current context, run the command: kubectl config --kubeconfig=/root/
 
 
 ## RBAC
+
+[developer-user-role](RBAC/developer-role.yaml),
+
+[user-role-binding.yaml](RBAC/user-role-binding.yaml)
+
+```docker
+# get roles
+kubectl get roles
+kubectl describe rolebindings.rbac.authorization.k8s.io devuser-developer-bindiing
+# get particular role
+kubectl describe role developer 
+# get rolebindings
+kubectl get rolebindings.rbac.authorization.k8s.io
+
+```
