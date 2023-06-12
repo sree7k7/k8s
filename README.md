@@ -1,4 +1,4 @@
-# Kubernetes...
+# Kubernetes
 
 ## Install multi node kind cluster
 
@@ -31,6 +31,7 @@ alias k=kubectl
 
 ```kubernetes
 kubectl run --help
+kubectl api-resources
 ```
 ## pods
 
@@ -473,6 +474,7 @@ kubectl describe role developer
 kubectl get rolebindings.rbac.authorization.k8s.io
 
 ```
+- ClusterRole is a non-namespaced resource. You can check via the `kubectl api-resources --namespaced=false` command. So the correct answer would be Cluster Roles are cluster wide and not part of any namespace.
 
 ### check the user can access a resource or not, e.g: deployment
 `kubectl auth can-i create deployments`,
@@ -486,3 +488,6 @@ To check for other user access:
 `kubectl auth can-i delete pod --as dev-user`
 
 `ps -auz | grep authorization`
+
+## Admission controllers
+
