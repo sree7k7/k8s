@@ -442,3 +442,12 @@ updating...
 
 ## Autentication
 
+updating...
+
+## kubeconfig
+
+path: /root/.kube/config
+
+`kubectl config view`
+
+[kubeconfig.yaml](kubeconfig/kubeconfig.yaml)
