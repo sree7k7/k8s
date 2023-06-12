@@ -484,3 +484,5 @@ To check for other user access:
 `kubectl auth can-i create pod --as dev-user`,
 
 `kubectl auth can-i delete pod --as dev-user`
+
+`ps -auz | grep authorization`
