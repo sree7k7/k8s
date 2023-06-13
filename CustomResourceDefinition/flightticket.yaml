@@ -1,0 +1,9 @@
+apiVersion: flights.com/v1
+kind: FlightTicket
+metadata:
+  name: my-flight-ticket
+  namespace: default
+spec:
+  from: Mumbai
+  to: London
+  number: 2

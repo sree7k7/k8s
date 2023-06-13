@@ -34,11 +34,13 @@ kubectl run --help
 kubectl api-resources
 ```
 ## pods
-
+When you create a pod, kubernetes creates and stores the information in ETCD database or datastore.
 ```bash
 kubectl get pods
 or 
 kb get pods -o wide
+
+kubectl explain pod 
 
 # get full yaml file
 kubectl get pod nginx -o yaml
@@ -171,7 +173,7 @@ docker build -t webapp-color:lite .
 
 Imperative:
 
-```kubernetes
+```bash
 kubectl create configmap app-config --from-literal=app_color=blue --from-literal=APP_MOD=prod
 
 -----
@@ -502,3 +504,12 @@ kubectl exec -it kube-apiserver-kind-control-plane -n kube-system -- kube-apiser
 ps -ef | grep kube-apiserver | grep admission-plugins
 
 ```
+
+## Install kubectl convert plugin on the controlplane node.
+
+[K8s doc for kubectl convert](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-convert-plugin)
+
+
+## Start kube-apiserver
+
+`kubectl proxy 8001&`
