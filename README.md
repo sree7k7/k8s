@@ -35,7 +35,7 @@ kubectl api-resources
 ```
 ## pods
 
-```docker
+```bash
 kubectl get pods
 or 
 kb get pods -o wide
