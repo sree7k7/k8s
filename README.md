@@ -513,3 +513,10 @@ ps -ef | grep kube-apiserver | grep admission-plugins
 ## Start kube-apiserver
 
 `kubectl proxy 8001&`
+
+## CustomResourceDefinition
+
+[flightticket.yaml](CustomResourceDefinition/flightticket.yaml)
+
+For custom definition file or object you need a controller.
+
