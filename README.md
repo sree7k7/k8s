@@ -78,7 +78,7 @@ or
 
 - kubectl create -f [myapp-replicaset.yaml](/ReplicaSet/myapp-replicaset.yaml)
 
-```cli
+```bash
 kubectl get replicaset 
 or
 kubectl get rs
@@ -154,7 +154,7 @@ e.g: `kb get all -n dev`
 
 ## Commands in Docker
 - To sleep a container for 5 seconds
-```
+```bash
 docker run --name ubuntu-sleeper ubuntu-sleeper 10
 
 # publish port 8080 on the container to 8282 on the host.
@@ -182,7 +182,7 @@ Declarative: [configMap.yaml](ConfigMap/configMap.yaml)
 
 ## secrets
 
-```
+```bash
 kubectl create secret generic app-secret --from-literal=DB_HOST=mysql
 
 -----------
@@ -191,12 +191,12 @@ k get secrets app-secret -o yaml
 ```
 
 To encode a string value
-```
+```bash
 echo -n 'mysql' | base64
 ```
 
 To decode a string value
-```
+```bash
 echo -n 'bXlzcWw=' | base64 --decode
 ```
 
@@ -204,15 +204,15 @@ echo -n 'bXlzcWw=' | base64 --decode
 
 Service account is used by applications. Which is similar to user accounts used by humans.
 
-```
+```bash
 kubectl create serviceaccount app-dashboard-sa
 ```
 Then you create the token for service account.
-```
+```bash
 kubectl create token app-dashboard-sa   
 ```
 decode the token and check the expiry data:
-```
+```bash
 jq -R 'split(".") | select(length > 0) | .[0],.[1] | @base64d | fromjson' <<< eyJhbGciOiJSUzI1NiIsImtpZCI6IndhRzFranBvTTFRZUJ5VzN0V2x1cWctejFKekx6SE10U2tNT1RTamZqY28ifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNjg0MDU4NjQxLCJpYXQiOjE2ODQwNTUwNDEsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJkZWZhdWx0Iiwic2VydmljZWFjY291bnQiOnsibmFtZSI6ImFwcC1kYXNoYm9hcmQtc2EiLCJ1aWQiOiJmN2FiMTVmNS00OWYwLTQ4MjgtODU5OC1iMTlmYTE4MjZiM2MifX0sIm5iZiI6MTY4NDA1NTA0MSwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmRlZmF1bHQ6YXBwLWRhc2hib2FyZC1zYSJ9.MvcxJT3OzWXAip8WWOXeuUYpv7vcT0fcTnV3n7x_myO_nggenoEheJTsJwyAexliHCCUiyk4vvqkjHLvAjyduyhGwl3xW5YfXrQdQdCXO-ohJ10W2WSj2UQQKbu1kT3vTw9qqyDNwrmTayH1pz7Mm5-x3zyPbHXlpe1VpA59PnDWEMGHJfncqQOUgbW2Q7Sj8UvgbVvTTyZk99QLhzliE-yGFHOzz-pTLmeXxbDB5pcipKlCrSYLhMIC7SUC3TbxN4wQHZrkU30uMrEVcy8waaG2uZgMsiKVA-b-aJd4n01n5QEz3Q1IFvkC88J7MjpwBeG1EUiov4JlsV7KnOtPvw
 ```
 
@@ -221,7 +221,7 @@ jq -R 'split(".") | select(length > 0) | .[0],.[1] | @base64d | fromjson' <<< ey
 - Taints are on nodes.
 - Tolerations are on pods.
 
-```
+```bash
 kubectl taint nodes node-name key=value:taint-effect
 
 e.g: kubectl taint nodes node1 app=blue:NoSchedule
@@ -230,7 +230,7 @@ The `taint-effect` has three options `NoSchedule`, `PreferNoSchedule`, `NoExecut
  
 To remove taint fromt the node:
 
-```
+```bash
 kubectl taint nodes kind-control-plane app=blue:NoSchedule-
 ```
 - Edit the control plane and comment the taint.
@@ -241,7 +241,7 @@ k edit nodes controlplane
 ## Node selector
 - label the nodes, we use node selectors while creating the pods.
 
-```
+```bash
 kubectl label nodes node01 key=value
 ```
 e.g:
@@ -269,12 +269,12 @@ There are two types of node affinity ➜
 
 ## Logs
 
-```docker
+```bash
 kubectl logs -f pod
 ```
 - Logs for multi-container
 
-```
+```bash
 kubectl logs -f podName containerName
 ```
 
@@ -286,18 +286,18 @@ kubectl create -f kubernetes-metrics-server/
 
 For Kind: follow this [link](https://gist.github.com/sanketsudake/a089e691286bf2189bfedf295222bd43)
 
-```
+```bash
 kubectl top node
 kubectl top pod
 ```
 
 ## Labels and selectors
-```
+```bash
 kubectl run hazelcast --image=hazelcast/hazelcast --labels="app=hazelcast,env=prod"
 kubectl run strawberry --image=hazelcast/hazelcast --labels="app=strawberry,env=prod"
 ```
 - To get the labels of all prod environment pods
-```docker
+```bash
 kubectl get po --selector env=prod
 
 # All objects in prod env
@@ -344,7 +344,7 @@ Update the yaml file e.g: replicas 3 to 4.
 
 [job-pod.yaml](jobs/job-pod.yaml)
 
-```docker
+```bash
 # Create job
 
 kubectl create job throw-dice-job --image=kodekloud/throw-dice --dry-run=client -o yaml
@@ -367,7 +367,7 @@ kubectl delete job job-name
 
 [service-NodePort.yaml](service/service-NodePort.yaml)
 
-```
+```bash
 kubectl create service nodeport pod-label --tcp=3008:80 --dry-run=client -o yaml
 ```
 
@@ -376,7 +376,7 @@ kubectl create service nodeport pod-label --tcp=3008:80 --dry-run=client -o yaml
 Nginx controller look for paths in nginx resource file. After, finding the path it will look for related service (which connects to pod, deployment).
 
 ### Ingress resource cmd
-```docker
+```bash
 kubectl create ingress <ingress-name> --rule="host/path=service:port"
 
 # e.g:
@@ -390,7 +390,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 ```
 
 ## ingress related commands
-```
+```bash
 kubectl get ingress -A
 kubectl describe ingress -A
 kubectl get svc -n ingress-nginx
@@ -407,7 +407,7 @@ To get the `ingress-controller` namespace, type: `kubectl get svc -A`
 
 `kubectl describe ingress -A` or give namespace.
 
-```
+```bash
 kubectl create ns ingress-nginx
 kubectl create configmap ingress-nginx-controller -n ingress-nginx
 kubectl create serviceaccount ingress-nginx -n ingress-nginx
@@ -464,7 +464,7 @@ To know the current context, run the command: kubectl config --kubeconfig=/root/
 
 [user-role-binding.yaml](RBAC/user-role-binding.yaml)
 
-```docker
+```bash
 # get roles
 kubectl get roles
 kubectl describe rolebindings.rbac.authorization.k8s.io devuser-developer-bindiing
@@ -491,7 +491,7 @@ To check for other user access:
 
 ## Admission controllers
 
-```docker
+```bash
 ps -ef | grep kube-apiserver | grep admission-plugins
 vi /etc/kubernetes/manifests/kube-apiserver.yaml 
 
