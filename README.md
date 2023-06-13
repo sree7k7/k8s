@@ -491,3 +491,14 @@ To check for other user access:
 
 ## Admission controllers
 
+```docker
+ps -ef | grep kube-apiserver | grep admission-plugins
+vi /etc/kubernetes/manifests/kube-apiserver.yaml 
+
+# Admission controllers enable by default:
+kubectl exec -it kube-apiserver-kind-control-plane -n kube-system -- kube-apiserver -h | grep 'enable-admission-plugins'
+
+# check the enabled and disabled amission plugins.
+ps -ef | grep kube-apiserver | grep admission-plugins
+
+```
