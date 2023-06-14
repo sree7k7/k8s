@@ -1,5 +1,5 @@
 apiVersion: flights.com/v1
-kind: FlightTicket
+kind: FlightTicket #this is from CustomResourceDefinition spec.names.kind field, kind
 metadata:
   name: my-flight-ticket
   namespace: default
