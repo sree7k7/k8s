@@ -545,3 +545,8 @@ It acts like a package manager for kubernetes resources.
 [Helm installation](https://helm.sh/docs/intro/install/)
 
 Templates and values file form a heml chart.
+
+Artifact hub: https://artifacthub.io/ stores the helm charts.
+
+### Search:
+`helm search hub nginx`
