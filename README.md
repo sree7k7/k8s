@@ -115,6 +115,13 @@ Once you switch service to Green, the traffic is routed, all at once!
 
 ### Canary deployment:
 
+Traffic is routed in small percentage to new deployment.
+
+In Canary there will be two deployments:
+Major with more number of pods
+Minor with small number of pods
+ 
+
 ## Name spaces
 
 Get namespaces
