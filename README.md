@@ -106,7 +106,7 @@ kb create deploy redis-deploy --image=redis --replicas=2 -n=dev --dry-run=client
 ```
 ### Deployment strategy
 Blue and Green
-[myapp-blue](deployments/blue-green-deployments/myapp-blue.yaml)
+[myapp-blue](deployments/blue-green-deployments/myapp-blue.yaml),
 [myapp-green](deployments/blue-green-deployments/myapp-green.yaml)
 Old version is blue
 New version is Green
