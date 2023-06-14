@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-blue
+  labels:
+    app: myapp
+    type: frontend
+spec:
+  template:
+    metadata: # pod metadata
+      name: myapp-pod
+      labels:
+        app: myapp # this (label) name has to be same as matchlabels
+        version: v1
+    spec:
+      containers:
+        - name: nginx-image-container
+          image: nginx
+          command:
+            - sh
+            - "-c"
+            - echo Hello Kubernetes version 1! && sleep 3600
+  replicas: 5
+  selector:
+    matchLabels:
+      app: myapp # this label name must matach pod label from above template definition
+      version: v1
+
