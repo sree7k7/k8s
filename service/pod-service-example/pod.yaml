@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: httpd
+  name: nginx
   labels:
     app: webapp
 spec:
   containers:
-  - name: httpd
-    image: httpd:stable
+  - name: nginx
+    image: nginx:stable
     ports:
       - containerPort: 80
         name: http-web-svc
