@@ -118,8 +118,8 @@ Once you switch service to Green, the traffic is routed, all at once!
 Traffic is routed in small percentage to new deployment.
 
 In Canary there will be two deployments:
-Major with more number of pods
-Minor with small number of pods
+- Major with more number of pods
+- Minor with small number of pods
 
 In service definition the labels are same for selectors. 
 
