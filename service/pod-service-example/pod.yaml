@@ -11,3 +11,19 @@ spec:
     ports:
       - containerPort: 80
         name: http-web-svc
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    app: webapp
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+      - containerPort: 80
+        name: nginx
