@@ -13,4 +13,3 @@ spec:
     nodePort: 31707
   type: NodePort
 
-  #testsdsd
