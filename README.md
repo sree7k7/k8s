@@ -104,6 +104,8 @@ kubectl create deployment nginx --image=nginx --replicas=5
 kubectl scale deployment nginx --replicas=5
 kb create deploy redis-deploy --image=redis --replicas=2 -n=dev --dry-run=client -o yaml
 ```
+### Deployment strategy
+Blue and Green
 
 ## Name spaces
 
