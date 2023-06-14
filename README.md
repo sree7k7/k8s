@@ -543,3 +543,5 @@ For custom definition file or object you need a controller.
 It acts like a package manager for kubernetes resources.
 
 [Helm installation](https://helm.sh/docs/intro/install/)
+
+Templates and values file form a heml chart.
