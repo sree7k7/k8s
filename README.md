@@ -550,3 +550,5 @@ Artifact hub: https://artifacthub.io/ stores the helm charts.
 
 ### Search:
 `helm search hub nginx`
+
+search for repos: `helm repo list`
