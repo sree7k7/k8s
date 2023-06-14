@@ -111,7 +111,9 @@ kb create deploy redis-deploy --image=redis --replicas=2 -n=dev --dry-run=client
 - New version is Green
 
 create a service. switch old (blue) to new (green) deployments.
-Once you switch service to Green, the traffic is routed.
+Once you switch service to Green, the traffic is routed, all at once!
+
+### Canary deployment:
 
 ## Name spaces
 
