@@ -538,3 +538,6 @@ ps -ef | grep kube-apiserver | grep admission-plugins
 
 For custom definition file or object you need a controller.
 
+## Helm
+
+[Helm installation](https://helm.sh/docs/intro/install/)
