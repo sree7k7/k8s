@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: httpd
   labels:
-    app: webapp
+    app: httpd
 spec:
   containers:
   - name: apace

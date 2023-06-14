@@ -9,5 +9,5 @@ spec:
   - name: name-of-service-port
     protocol: TCP
     port: 8080
-    targetPort: 80
+    targetPort: 31656
   type: NodePort
