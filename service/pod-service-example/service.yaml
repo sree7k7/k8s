@@ -6,12 +6,12 @@ spec:
   selector:
     app: webapp
   ports:
-  - name: name-of-service-port
+  - name: nginx
     protocol: TCP
     port: 8080
     targetPort: 80
     nodePort: 31704
-  - name: name-of-service-port
+  - name: http
     protocol: TCP
     port: 8080
     targetPort: 80
