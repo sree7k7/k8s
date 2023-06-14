@@ -540,4 +540,6 @@ For custom definition file or object you need a controller.
 
 ## Helm
 
+It acts like a package manager for kubernetes resources.
+
 [Helm installation](https://helm.sh/docs/intro/install/)
