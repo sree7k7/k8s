@@ -110,7 +110,7 @@ kb create deploy redis-deploy --image=redis --replicas=2 -n=dev --dry-run=client
 - Old version is blue
 - New version is Green
 
-Still the traffic is routed to blue.
+create a service. switch old (blue) to new (green) deployments.
 Once you switch to Green, the traffic is routed.
 
 ## Name spaces
