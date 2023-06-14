@@ -8,7 +8,3 @@ do
 done
 
 
-
-#git pull
-
-#while true; do git pull; sleep 5; done
