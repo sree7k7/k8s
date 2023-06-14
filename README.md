@@ -105,7 +105,6 @@ kubectl scale deployment nginx --replicas=5
 kb create deploy redis-deploy --image=redis --replicas=2 -n=dev --dry-run=client -o yaml
 ```
 ### Deployment strategy
-Blue and Green
 [myapp-blue](deployments/blue-green-deployments/myapp-blue.yaml),
 [myapp-green](deployments/blue-green-deployments/myapp-green.yaml)
 - Old version is blue
