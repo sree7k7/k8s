@@ -7,7 +7,7 @@ spec:
     app: webapp
   ports:
   - name: nginx
-    protocol: TCP
+    # protocol: TCP
     port: 8080
     targetPort: 80
     nodePort: 31704
