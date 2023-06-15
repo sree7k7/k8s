@@ -556,7 +556,12 @@ $ `helm search hub wordpress`
 
 cmds:
 ```bash
+# To list repositories
 helm repo list
+
+# To list packages, installed using helm
+helm list
+
 helm uninstall my-release
 helm search repo package
 helm pull --untar bitnami/wordpress
