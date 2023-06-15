@@ -549,6 +549,8 @@ Templates and values file form a heml chart.
 Artifact hub: https://artifacthub.io/ stores the helm charts.
 
 ### Search:
+To search helm chart: examples:-
 `helm search hub nginx`
+`helm search hub wordpress`
 
 search for repos: `helm repo list`
