@@ -546,7 +546,7 @@ It acts like a package manager for kubernetes resources.
 
 Templates and values file form a heml chart.
 
-Artifact hub repository: https://artifacthub.io/ stores the helm charts.
+Artifact hub repository: https://artifacthub.io/ stores the helm charts. A repo contains help charts.
 
 To search helm chart: examples:-
 
