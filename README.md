@@ -558,10 +558,12 @@ cmds:
 ```bash
 helm repo list
 helm uninstall my-release
+helm search repo package
 helm pull --untar bitnami/wordpress
 ls wordpress
 helm install release-4 ./wordpress
 
 e.g:
 helm repo add bitnami https://charts.bitnami.com/bitnami
+helm search repo joomla
 ```
