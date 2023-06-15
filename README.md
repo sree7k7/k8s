@@ -555,10 +555,13 @@ $ `helm search hub nginx`
 $ `helm search hub wordpress`
 
 cmds:
-```
+```bash
 helm repo list
 helm uninstall my-release
 helm pull --untar bitnami/wordpress
 ls wordpress
 helm install release-4 ./wordpress
+
+e.g:
+helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
