@@ -566,4 +566,5 @@ helm install release-4 ./wordpress
 e.g:
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm search repo joomla
+helm pull chatrepo/chartname
 ```
