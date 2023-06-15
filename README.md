@@ -554,4 +554,11 @@ $ `helm search hub nginx`
 
 $ `helm search hub wordpress`
 
-search for repos: `helm repo list`
+cmds:
+```
+helm repo list
+helm uninstall my-release
+helm pull --untar bitnami/wordpress
+ls wordpress
+helm install release-4 ./wordpress
+```
