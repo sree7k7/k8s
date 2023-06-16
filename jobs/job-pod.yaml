@@ -6,8 +6,8 @@ metadata:
     run: math-add-job
   name: math-add-job
 spec:
-  completions: 3 # 3 desired and successful pods
-  parallelism: 3
+  completions: 3 # 3 desired and successful pods, pods are created when the previous pod is created or failure. It will make sure to compelete three pods.
+  parallelism: 3 # creates 3 pods parallel
   template:
     spec:
       containers:
