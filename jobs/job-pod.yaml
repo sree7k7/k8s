@@ -6,7 +6,7 @@ metadata:
     run: math-add-job
   name: math-add-job
 spec:
-  completions: 3
+  completions: 3 # 3 desired and successful pods
   parallelism: 3
   template:
     spec:
