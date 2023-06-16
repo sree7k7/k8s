@@ -56,7 +56,9 @@ kubectl exec -it pod -- bash
 # To replace the pod-definition file.
 k replace --force -f pod.yaml
 or try
-k apply -f pod-with-secrets.yaml
+kubectl apply -f pod-with-secrets.yaml
+
+kubectl replace -f pod.yaml --force
 
 e.g:
 kubectl run nginx --image=nginx --dry-run=client -o yaml
