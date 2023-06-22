@@ -52,6 +52,8 @@ k run pod-name --image image --dry-run=client -o yaml
 kubectl exec -i podName -n namespace -- pwd
 kubectl exec -it podName -n namespace -- pwd
 kubectl exec -it pod -- bash
+kubectl exec --stdin --tty pod -- ping 10.244.0.8
+kubectl exec -it webapp-color -- sh
 
 # To replace the pod-definition file.
 k replace --force -f pod.yaml
@@ -69,6 +71,10 @@ k delete pod --all
 kubectl delete pod --all -n default
 
 ```
+## Pod with Init-containers
+When a Pod is created, first init continer will run for one time. Later, the container will run. 
+
+[init-container.yaml](initContainers/init-container.yaml)
 
 ## create pod with namespace
 
@@ -155,6 +161,9 @@ or
 ## Service
 
 ### Create a Service named redis-service of type ClusterIP to expose pod redis on port 6379
+
+#### check the connection on port 80:
+`nc -v -z -w 2 secure-service 80`
 
 - kubectl create service clusterip redis-service --tcp=6379:6379 --dry-run=client -o yaml
 
@@ -348,6 +357,8 @@ Used for buildversion, emails, phone numbers, etc.
 Update the yaml file e.g: replicas 3 to 4.
 
 `kubectl set image deployment.apps/rolling-deployment containerName=1.23.4-perl`
+
+`kubectl set image deployment deployName nginx=nginx:1.17`
 
 ### update deployment
 `kubectl rollout status deployment/Appdeployment`
