@@ -76,6 +76,8 @@ kubectl delete pod --all -n default
 [multi-container-pod](multi-container-pod/multi-container-pod.yaml)
 
 connect to a container:
+[pod-init-volumemount](PersistentVolumes/pod-init-container-volumemounts.yaml)
+
 ```
 kubectl exec -it busybox -c container1 -- /bin/sh
 kubectl exec -it busybox -c container2 -- /bin/sh
