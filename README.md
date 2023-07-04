@@ -298,6 +298,14 @@ There are two types of node affinity ➜
 
 [multi-container-pod](multi-container-pod/multi-container-pod.yaml)
 
+connect to a container:
+```
+kubectl exec -it busybox -c container1 -- /bin/sh
+kubectl exec -it busybox -c container2 -- /bin/sh
+ls
+exit
+```
+
 ## Logs
 
 ```bash
