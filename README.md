@@ -71,6 +71,17 @@ k delete pod --all
 kubectl delete pod --all -n default
 
 ```
+## Mulit-container-pod
+
+[multi-container-pod](multi-container-pod/multi-container-pod.yaml)
+
+connect to a container:
+```
+kubectl exec -it busybox -c container1 -- /bin/sh
+kubectl exec -it busybox -c container2 -- /bin/sh
+ls
+exit
+```
 ## Pod with Init-containers
 When a Pod is created, first init continer will run for one time. Later, the container will run. 
 
@@ -293,18 +304,6 @@ There are two types of node affinity ➜
 - `preferredDuringSchedulingIgnoredDuringExecution`: The scheduler tries to find a node that meets the rule. If a matching node is not available, the scheduler still schedules the Pod.
 
 [nodeAffinity.yaml](NodeAffinity/nodeAffinity.yaml)
-
-## Mulit-container-pod
-
-[multi-container-pod](multi-container-pod/multi-container-pod.yaml)
-
-connect to a container:
-```
-kubectl exec -it busybox -c container1 -- /bin/sh
-kubectl exec -it busybox -c container2 -- /bin/sh
-ls
-exit
-```
 
 ## Logs
 
