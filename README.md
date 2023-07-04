@@ -1,5 +1,7 @@
 # Kubernetes
 
+Follow [Imperative commands](https://github.com/dgkanatsios/CKAD-exercises/blob/main/c.pod_design.md) guide.
+
 ## Install multi node kind cluster
 
 - Make a file: [kind-example-config.yaml](kind-example-config.yaml)
