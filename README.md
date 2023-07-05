@@ -591,14 +591,24 @@ helm repo list
 # To list packages, installed using helm
 helm list
 
+# uninstall release
 helm uninstall my-release
 helm search repo package
 helm pull --untar bitnami/wordpress
 ls wordpress
+# install package
 helm install release-4 ./wordpress
 
 e.g:
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm search repo joomla
+# download repository
 helm pull chatrepo/chartname
+
+# Download the bitnami apache package
+helm pull --untar bitnami/apache
+
+# upgrade release
+helm upgrade releaseName bitnami/nginx
+helm upgrade releaseName bitnami/nginx -n mercury
 ```
