@@ -25,7 +25,10 @@ ERROR: failed to create cluster: failed to get kubeconfig to merge: yaml: unmars
 ## Make an alias
 
 ```shell
-alias kb=kubectl
+export do="--dry-run=client -o yaml"    # k create deploy nginx --image=nginx $do
+
+export now="--force --grace-period 0"   # k delete pod x $now
+
 alias k=kubectl
 ```
 
@@ -370,6 +373,8 @@ Update the yaml file e.g: replicas 3 to 4.
 `kubectl set image deployment.apps/rolling-deployment containerName=1.23.4-perl`
 
 `kubectl set image deployment deployName nginx=nginx:1.17`
+
+`kubectl rollout history deployments/myapp-blue --revision=2`
 
 ### update deployment
 `kubectl rollout status deployment/Appdeployment`
