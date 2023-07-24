@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: holy-api        # name stays the same
+  namespace: pluto      # important
+spec:
+  replicas: 3           # 3 replicas
+  selector:
+    matchLabels:
+      id: holy-api      # set the correct selector
+  template:
+    # => from here down its the same as the pods metadata: and spec: sections
+    metadata:
+      labels:
+        id: holy-api
+      name: holy-api
+    spec:
+      containers:
+      - env:
+        - name: CACHE_KEY_1
+          value: b&MTCi0=[T66RXm!jO@
+        - name: CACHE_KEY_2
+          value: PCAILGej5Ld@Q%{Q1=#
+        - name: CACHE_KEY_3
+          value: 2qz-]2OJlWDSTn_;RFQ
+        image: nginx:1.17.3-alpine
+        name: holy-api-container
+        securityContext:                   # add
+          allowPrivilegeEscalation: false  # add
+          privileged: false                # add
+        volumeMounts:
+        - mountPath: /cache1
+          name: cache-volume1

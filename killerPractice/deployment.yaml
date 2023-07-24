@@ -1,0 +1,59 @@
+# 12_pv.yaml
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+ name: earth-project-earthflower-pv
+spec:
+ capacity:
+  storage: 2Gi
+ accessModes:
+  - ReadWriteOnce
+ hostPath:
+  path: "/Volumes/Data"
+---
+
+# 12_pvc.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: earth-project-earthflower-pvc
+  namespace: earth
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+     storage: 2Gi
+
+---
+# 12_dep.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: project-earthflower
+  name: project-earthflower
+  namespace: earth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project-earthflower
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: project-earthflower
+    spec:
+      volumes:                                      # add
+      - name: data                                  # add
+        persistentVolumeClaim:                      # add
+          claimName: earth-project-earthflower-pvc  # add
+      containers:
+      - image: httpd:2.4.41-alpine
+        name: container
+        volumeMounts:                               # add
+        - name: data                                # add
+          mountPath: /tmp/project-data              # add

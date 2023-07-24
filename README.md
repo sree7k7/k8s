@@ -85,7 +85,6 @@ connect to a container:
 
 ```
 kubectl exec -it busybox -c container1 -- /bin/sh
-kubectl exec -it busybox -c container2 -- /bin/sh
 ls
 exit
 ```
@@ -129,6 +128,9 @@ kb create -f deployment.yaml --record
 kubectl create deployment nginx --image=nginx --replicas=5
 kubectl scale deployment nginx --replicas=5
 kb create deploy redis-deploy --image=redis --replicas=2 -n=dev --dry-run=client -o yaml
+
+# k -n namespace get deploy,pod | grep -i "podname"
+# k get deploy,pod | grep -i "podname"
 ```
 ### Deployment strategy
 [myapp-blue](deployments/blue-green-deployments/myapp-blue.yaml),
@@ -136,16 +138,20 @@ kb create deploy redis-deploy --image=redis --replicas=2 -n=dev --dry-run=client
 - Old version is blue
 - New version is Green
 
-create a service. switch old (blue) to new (green) deployments.
-Once you switch service to Green, the traffic is routed, all at once!
+Use two deployments with `stage:blue` and `stage:green` labels. Use a Service with a `stage:blue` selector. Once the `stage:green` deployment is up and tested, edit the selector in the service to `stage:green`.
 
 ### Canary deployment:
 
 Traffic is routed in small percentage to new deployment.
 
 In Canary there will be two deployments:
-- Major with more number of pods
-- Minor with small number of pods
+- One is main deployment. The whole traffic is routed to main.
+- Second is the canary deployment. Small portion of traffic is routed by creating less replicas (pods).
+
+The svc aka service will be same with same selector label.
+
+First, create a deployment and route the traffic with svc. 
+Second, create a new deployement with less pods (replicas). And route the traffic to same svc. 
 
 In service definition the labels are same for selectors. 
 
@@ -260,7 +266,10 @@ Then you create the token for service account.
 ```bash
 kubectl create token app-dashboard-sa   
 ```
-decode the token and check the expiry data:
+-  When you create a pod, automatically a service account and correspoinding token is created, and the token is mounted under `/var/run/secrets/kubernetes.io/serviceaccount/token`
+
+- For every namespace their is serviceaccount.
+- decode the token and check the expiry data:
 ```bash
 jq -R 'split(".") | select(length > 0) | .[0],.[1] | @base64d | fromjson' <<< eyJhbGciOiJSUzI1NiIsImtpZCI6IndhRzFranBvTTFRZUJ5VzN0V2x1cWctejFKekx6SE10U2tNT1RTamZqY28ifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNjg0MDU4NjQxLCJpYXQiOjE2ODQwNTUwNDEsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJkZWZhdWx0Iiwic2VydmljZWFjY291bnQiOnsibmFtZSI6ImFwcC1kYXNoYm9hcmQtc2EiLCJ1aWQiOiJmN2FiMTVmNS00OWYwLTQ4MjgtODU5OC1iMTlmYTE4MjZiM2MifX0sIm5iZiI6MTY4NDA1NTA0MSwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmRlZmF1bHQ6YXBwLWRhc2hib2FyZC1zYSJ9.MvcxJT3OzWXAip8WWOXeuUYpv7vcT0fcTnV3n7x_myO_nggenoEheJTsJwyAexliHCCUiyk4vvqkjHLvAjyduyhGwl3xW5YfXrQdQdCXO-ohJ10W2WSj2UQQKbu1kT3vTw9qqyDNwrmTayH1pz7Mm5-x3zyPbHXlpe1VpA59PnDWEMGHJfncqQOUgbW2Q7Sj8UvgbVvTTyZk99QLhzliE-yGFHOzz-pTLmeXxbDB5pcipKlCrSYLhMIC7SUC3TbxN4wQHZrkU30uMrEVcy8waaG2uZgMsiKVA-b-aJd4n01n5QEz3Q1IFvkC88J7MjpwBeG1EUiov4JlsV7KnOtPvw
 ```
@@ -410,6 +419,10 @@ e.g: kubectl logs math-add-job-9lh7c
 
 kubectl delete job job-name
 
+# Job report, number of pod used to completions.
+
+`kubectl get pods -l job-name=report -o name | wc -l`
+
 ```
 
 ## Services
@@ -526,7 +539,7 @@ kubectl get rolebindings.rbac.authorization.k8s.io
 - ClusterRole is a non-namespaced resource. You can check via the `kubectl api-resources --namespaced=false` command. So the correct answer would be Cluster Roles are cluster wide and not part of any namespace.
 
 ### check the user can access a resource or not, e.g: deployment
-`kubectl auth can-i create deployments`,
+`kubectl auth can-i Use two deployments with stage:blue and stage:green labels. Use a Service with a stage:blue selector. Once the stage:green deployment is up and tested, edit the selector in the service to stage:green.bluecreate deployments`,
 
 `kubectl auth can-i delete deployments`
 
@@ -555,6 +568,14 @@ ps -ef | grep kube-apiserver | grep admission-plugins
 ## Install kubectl convert plugin on the controlplane node.
 
 [K8s doc for kubectl convert](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-convert-plugin)
+
+
+`kubectl-convert -f deploy.yaml --output-version apps/v2beta1`
+
+### It lists the cluster objects using a specific API version, which is useful for detecting deprecated components in the cluster
+
+`kubectl api-resources --verbs=list -o name | xargs -n 1`
+
 
 
 ## Start kube-apiserver
@@ -590,6 +611,11 @@ helm repo list
 
 # To list packages, installed using helm
 helm list
+helm list -n namespace
+
+# install release
+helm install releaseName bitnami/apache 
+helm install releaseName bitnami/apache --set replicaCount=2
 
 # uninstall release
 helm uninstall my-release
