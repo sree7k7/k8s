@@ -61,7 +61,7 @@ kubectl exec --stdin --tty pod -- ping 10.244.0.8
 kubectl exec -it webapp-color -- sh
 
 # To replace the pod-definition file.
-k replace --force -f pod.yaml
+k replace --force -f pod.yaml --grace-period=0
 or try
 kubectl apply -f pod-with-secrets.yaml
 
@@ -220,6 +220,32 @@ docker run python:3.6 cat /etc/*release*
 # for lite images use alpine and add "tag" to image.
 
 docker build -t webapp-color:lite .
+
+# build image with two tags
+
+sudo docker build -t registry.killer.sh:5000/sun-cipher:latest -t registry.killer.sh:5000/sun-cipher:v1-docker .
+
+sudo docker build -t image-name:latest -t image-name:tag-2 .
+
+# push to registry
+
+sudo docker push registry.killer.sh:5000/sun-cipher:latest
+
+sudo docker push registry.killer.sh:5000/sun-cipher:v1-docker
+
+# To save docker image to a location
+
+sudo docker save -o buzz.tar image:1
+sudo docker save -o buzz.tar buzz:1
+
+# build image using podman
+
+podman build -t registry.killer.sh:5000/sun-cipher:v1-podman .
+
+# create a container using podman image
+
+podman run -d --name sun-cipher registry.killer.sh:5000/sun-cipher:v1-podman
+
 ```
 
 ## Config maps
@@ -360,6 +386,13 @@ kubectl get all --selector env=prod
 # Multi search
 kubectl get po --selector env=prod,bu=finance,tier=frontend
 
+# label pods
+k label pod -l <previous=label> <new=label>
+k label pod -l app=myapp protected=security
+
+# add annotation to pod
+kubectl annotate pods -l protected=true protected='do not delete this pod'
+
 ```
 
 There are two types of labels:
@@ -489,6 +522,17 @@ A network policy can be applied on a Pod. The pod policy will define how the tra
 
 ingress network policy: [network-policy-definition.yaml](NetworkPolicy/network-policy-definition.yaml)
 
+## StatefulSets
+[stateful, service and deploy](StatefulSets/Servcie-deployment.yaml)
+- for stateful set you need servcie and deployment.
+- In service ClusterIp set to none.
+- In deployment file change kind from `Deployment` and `StatefulSet`
+
+After creation, all pods will get separate DNS record created.
+
+- `pod-0.service.default.svc.cluster.local`
+- `pod-1.service.default.svc.cluster.local`
+
 ## State Persistence
 
 ### Persistent volume
@@ -553,6 +597,27 @@ To check for other user access:
 
 ## Admission controllers
 
+e.g:
+
+The requst flow:
+user (kubectl) > Authentication (ssh) > Authorization (RBAC) > Admission Controllers (custom) > create pod
+
+In admission controller we can define `NamespaceAutoProvision`. So, when a pod is created with namespace, the ns assigned to pod.
+
+example senario:
+- create a pod with namespace `blue`. Don't create a namesapce `blue` prior.
+- The pod will be created with namespace, even though the namespace is not created earlier.
+
+e.g: for namesapce auto provision: NamespaceAutoProvision
+
+`vi /etc/kubernetes/manifests/kube-apiserver.yaml`
+
+Add: `NamespaceAutoProvision` under, enabled-admission-plugins flag
+
+`- --enable-admission-plugins=NodeRestriction,NamespaceAutoProvision`
+
+-> To disable admission controller flag
+`- --disable-admission-plugins=NodeRestriction,NamespaceAutoProvision`
 ```bash
 ps -ef | grep kube-apiserver | grep admission-plugins
 vi /etc/kubernetes/manifests/kube-apiserver.yaml 
@@ -569,6 +634,7 @@ ps -ef | grep kube-apiserver | grep admission-plugins
 
 [K8s doc for kubectl convert](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-convert-plugin)
 
+![convert](image-1.png)
 
 `kubectl-convert -f deploy.yaml --output-version apps/v2beta1`
 
@@ -637,4 +703,16 @@ helm pull --untar bitnami/apache
 # upgrade release
 helm upgrade releaseName bitnami/nginx
 helm upgrade releaseName bitnami/nginx -n mercury
+
+# to delete relase.
+# list release 
+helm ls
+helm uninstall release
+
+## set replica count to a new release
+helm install new-bitnami-apace-relase bitnami/apache --set replicaCount=2
+
+or for image
+
+--set image.debug=true
 ```

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: moon-pvc-126            # name as requested
+  namespace: moon               # important
+spec:
+  accessModes:
+    - ReadWriteOnce             # RWO
+  resources:
+    requests:
+      storage: 3Gi              # size
+  storageClassName: moon-retain # uses our new storage class
