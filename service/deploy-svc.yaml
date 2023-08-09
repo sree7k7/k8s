@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: my-webapp
-  name: my-webapp
+  name: my-webapp-deploy
 spec:
   replicas: 1
   selector:

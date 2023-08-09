@@ -3,12 +3,17 @@ kind: Application
 metadata:
   name: myapp-argo-application
   namespace: argocd
+  labels:
+    name: myapp-argo-application
+  finalizers:
+    # The default behaviour is foreground cascading deletion. It delete both the app and it's resource.
+    - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
+  project: default # default namespace. i.e, your deployment created in default namespace
   source:
-    repoURL: https://github.com/sree7k7/k8s
+    repoURL: https://github.com/sree7k7/k8s #github repo url
     targetRevision: HEAD
-    path: service
+    path: service #git folder, where the code lies.
   destination:
     server: https://kubernetes.default.svc
     namespace: default
@@ -19,4 +24,4 @@ spec:
     # changes made to cluster to sync github, argoCD will see the changes made in manifest file
     automated:
       selfHeal: true
-      prune: true
+      prune: true # trim. if the resources should be pruned during auto-syncing.
